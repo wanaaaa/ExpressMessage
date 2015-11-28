@@ -1,0 +1,38 @@
+<h4>I am index in messages</h4>
+
+<form action="/messages/index" method="post" class="form-horizontal" >
+	<div  class="form-group">
+		<h5>author</h5>
+		<input name="message[author]" placeholder="author" class="form-control"></textarea>
+
+		<h5>Content</h5>
+		<textarea name="message[content]" placeholder="Content" class="form-control"></textarea> 
+		<div class="hide">
+			<h5>Comment</h5>
+			<textarea name="message[comment]" placeholder="comment" class="form-control"></textarea> 
+			<input type="submit" value="submit"><br>
+		</div>
+	</div>
+</form>
+
+<% messageObjects.forEach(function (object, i) { %>
+author: <%= 	object.author %> ---
+content: <%= 	object.content %> ---
+comment: <%= 	object.comment %> ---
+<br>
+
+<form action="/messages/<%= object._id %>?_method=PATCH" method="post">
+	<label>Add or Edit Comment ::</label> 
+	<textarea name="message[author]" class="hide"><%= object.author  %></textarea>
+	<textarea name="message[content]" class="hide"><%= object.content %></textarea>
+	<textarea name="message[comment]"><%= object.comment %></textarea>
+	<input type="submit" value="submit">
+</form>
+
+
+
+
+<form action="/messages/<%= object._id %>?_method=DELETE" method="post">
+	<input type="submit" value="Delete">
+</form>
+<% }) %>

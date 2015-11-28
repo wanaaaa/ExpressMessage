@@ -1,0 +1,9 @@
+<form action="/messages/<%= messageInfos._id %>?_method=PATCH" method="post">
+	<label>Add or Edit Comment ::</label> 
+	<textarea name="message[author]"><%= messageInfos.author  %></textarea>
+	<textarea name="message[content]"><%= messageInfos.content %></textarea>
+	<textarea name="message[comment]"><%= messageInfos.comment %></textarea>
+	<input type="submit" value="submit">
+</form>
+
+<p><%= messageInfos %></p>
