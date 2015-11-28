@@ -6,28 +6,37 @@
 		<input name="message[author]" placeholder="author" class="form-control"></textarea>
 
 		<h5>Content</h5>
-		<textarea name="message[content]" placeholder="Content" class="form-control"></textarea> 
-		<div class="hide">
+		<textarea name="message[content]" placeholder="Content" class="form-control"></textarea>
+
+		<h5>Email</h5>
+		<input name="message[email]" placeholder="Email" class="form-control">
+
 			<h5>Comment</h5>
 			<textarea name="message[comment]" placeholder="comment" class="form-control"></textarea> 
-			<input type="submit" value="submit"><br>
+
+		<div class="submit">
+		<input type="submit" value="submit"  ><br>
 		</div>
+
 	</div>
 </form>
 
 <% messageObjects.forEach(function (object, i) { %>
-author: <%= 	object.author %> ---
+author:  <%= 	object.author %> ---
 content: <%= 	object.content %> ---
 comment: <%= 	object.comment %> ---
 <br>
 
-<form action="/messages/<%= object._id %>?_method=PATCH" method="post">
+<form action="/messages/<%= object._id %>?_method=PATCH" method="post" class="submit">
 	<label>Add or Edit Comment ::</label> 
 	<textarea name="message[author]" class="hide"><%= object.author  %></textarea>
 	<textarea name="message[content]" class="hide"><%= object.content %></textarea>
-	<textarea name="message[comment]"><%= object.comment %></textarea>
-	<input type="submit" value="submit">
-</form>
+	<textarea name="message[comment]" id="a<%= i %>"><%= object.comment %></textarea>
+	<textarea name="message[email]" id="e<%= i %>"><%= object.email %></textarea>
+
+		<input type="submit" value="submit"  >
+
+</form><button iter=<%= i%>>Send Email with comment</button>
 
 
 

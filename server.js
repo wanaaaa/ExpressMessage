@@ -11,6 +11,16 @@ var express = require('express'),
 	mongoose = require('mongoose');
 	session = require('express-session');
 
+var nodemailer = require('nodemailer');
+var transporter = nodemailer.createTransport({
+  service: 'Gmail',
+  auth: {
+      user: 'FinalProjectGeneral@gmail.com',
+      pass: 'generalassembly'
+  }
+});
+
+
 server.set('views', './views');
 server.set('view engine', 'ejs');
 
@@ -35,6 +45,26 @@ server.use('/messages', messageController);
 server.get('/', function (req, res) {
 	res.render('welcome');
 });
+
+server.get('/send', function(req, res) {
+  var mailOptions = {
+    from: 'Final Project WDI <FinalProjectGeneral.com>', // sender address
+    to: req.query.to, // list of receivers
+    subject: req.query.subject, // Subject line
+    text: req.query.text, // plaintext body
+    html: req.query.text // html body
+  };
+
+  console.log("req",req.query);
+
+  transporter.sendMail(mailOptions, function(error, info){
+    if(error){
+        return console.log(error);
+    }
+    console.log('Message sent: ');
+  });
+ 
+}); //End of server.get
 
 /////////////////////////////////////////////////
 mongoose.connect(MONGOURI);
