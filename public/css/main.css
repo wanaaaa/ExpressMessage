@@ -1,1 +1,7 @@
-main.css
+body {
+	background-color: #ebebe0;
+}
+
+.border {
+	border: 3px solid black;
+}

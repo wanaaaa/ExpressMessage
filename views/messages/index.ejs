@@ -1,47 +1,61 @@
-<h4>I am index in messages</h4>
+<div class="row" class="border">
+	<div class="col-sm-3 col-md-3"></div>
+	<div class="col-sm-6 col-md-6 border">
+			<h4 >Leave your question</h4>
+			<form action="/messages/index" method="post" class="form-horizontal form-group" >
+					<label for="author">Customer</label>
+					<input name="message[author]" placeholder="name" id="author" class="form-control"></textarea>
 
-<form action="/messages/index" method="post" class="form-horizontal" >
-	<div  class="form-group">
-		<h5>author</h5>
-		<input name="message[author]" placeholder="author" class="form-control"></textarea>
+					<label for="content">Question</label>
+					<textarea name="message[content]" placeholder="Content" id="content" class="form-control"></textarea>
 
-		<h5>Content</h5>
-		<textarea name="message[content]" placeholder="Content" class="form-control"></textarea>
+					<label for="Email">Email address</label>
+					<input name="message[email]" placeholder="Email to send email" class="form-control" id="Email">
 
-		<h5>Email</h5>
-		<input name="message[email]" placeholder="Email" class="form-control">
+					<div class="hide">
+						<h5>Comment</h5><label for="comment">Answer</label>
+						<textarea name="message[comment]" placeholder="answer" class="form-control" id="comment"></textarea> 
+					</div>
 
-			<h5>Comment</h5>
-			<textarea name="message[comment]" placeholder="comment" class="form-control"></textarea> 
-
-		<div class="submit">
-		<input type="submit" value="submit"  ><br>
-		</div>
+					<div class="submit">
+						<input type="submit" value="submit"  ><br>
+					</div>
+		</form>
 
 	</div>
-</form>
+</div><br>
+<!------------------------------------------  -->
+<div class="row" class="border">
+	<div class="col-sm-3 col-md-3"></div>
+	<div class="col-sm-6 col-md-6 border">
 
-<% messageObjects.forEach(function (object, i) { %>
-author:  <%= 	object.author %> ---
-content: <%= 	object.content %> ---
-comment: <%= 	object.comment %> ---
-<br>
+		<% messageObjects.forEach(function (object, i) { %>
+		<p> <strong>Customer:</strong>  <%= 	object.author %>,  <strong> e=Email:</strong> <%= 	object.email %></p>
+		<p> <strong> Question: </strong> <%= 	object.content %></p>
+		<p> <strong> Answer  :</strong> <%= 	object.comment %></p>
+		<br>
 
-<form action="/messages/<%= object._id %>?_method=PATCH" method="post" class="submit">
-	<label>Add or Edit Comment ::</label> 
-	<textarea name="message[author]" class="hide"><%= object.author  %></textarea>
-	<textarea name="message[content]" class="hide"><%= object.content %></textarea>
-	<textarea name="message[comment]" id="a<%= i %>"><%= object.comment %></textarea>
-	<textarea name="message[email]" id="e<%= i %>"><%= object.email %></textarea>
+		<form action="/messages/<%= object._id %>?_method=PATCH" method="post" 
+					class="submit" class="form-horizontal form-group">
+			<label>Add or Edit Answer ::</label> 
+			<!-- <textarea name="message[author]" class="hide"><%= object.author  %></textarea>
+			<textarea name="message[content]" class="hide"><%= object.content %></textarea> -->
+			<!--<textarea name="message[comment]" id="a<%= i %>"><%= object.comment %></textarea> -->
+			<p id="a<%= i %>" class="hide"><%= object.comment %></p>
+			<textarea name="message[email]" id="e<%= i %>" class="hide"><%= object.email %></textarea>
 
-		<input type="submit" value="submit"  >
+				<input type="submit" value="submit"  >
 
-</form><button iter=<%= i%>>Send Email with comment</button>
+		</form><button iter=<%= i%>>Send Email with comment</button>
 
-
-
-
-<form action="/messages/<%= object._id %>?_method=DELETE" method="post">
-	<input type="submit" value="Delete">
-</form>
+		<form action="/messages/<%= object._id %>?_method=DELETE" method="post">
+			<input type="submit" value="Delete">
+		</form>
 <% }) %>
+
+
+	</div>
+</div>
+
+
+
