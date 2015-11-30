@@ -43,7 +43,8 @@ var messageController = require('./controllers/messages.js');
 server.use('/messages', messageController);
 
 server.get('/', function (req, res) {
-	res.render('welcome');
+	// res.render('messages/');
+  res.redirect(301, '/messages')
 });
 
 server.get('/send', function(req, res) {
